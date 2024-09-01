@@ -47,8 +47,8 @@ class CreateSuperAdminSeeder extends Seeder
             [
                 
                 'name' => 'رغد فهدالمغيدي',
-                'email' => 'ralmughidi@gamil.com',
-                'username' => 'ralmughidi',
+                'email' => 'ralmagadi@kku.edu.sa',
+                'username' => 'ralmagadi',
                 'password' => Hash::make('ralmagadi$312%578'),
                 'phone_number' => '0545001845',
                 'mobile_number' => '0545001845',
