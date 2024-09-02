@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" class="light-style layout-navbar-fixed layout-menu-fixed" dir="rtl"
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed" dir="ltr"
     data-assets-path="{{ asset('assets') }}" data-theme="theme-default" data-template="vertical-menu-template">
 <!-- BEGIN: Head-->
 
