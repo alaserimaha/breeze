@@ -99,15 +99,11 @@
         <div class="layout-container">
             <!-- Layout container -->
             <div class="layout-page">
-                <!-- BEGIN: Header-->
-                @include('layouts.navbar')
-                <!-- END: Header-->
+              
 
 
 
-                <!-- BEGIN: Main Menu-->
-                @include('layouts.sidebar')
-                <!-- END: Main Menu-->
+             
 
                 <!-- BEGIN: Content-->
                 <div class="content-wrapper">
@@ -141,5 +137,6 @@
 
 </body>
 <!-- END: Body-->
+
 
 </html>

@@ -16,16 +16,7 @@
 
         </div>
     </div>
-    <script src="assets/vendor/libs/dropzone/dropzone.js" ></script>
-    <script>
-        const myDropzone = new Dropzone('#dropzone-basic', {
-  previewTemplate: previewTemplate,
-  parallelUploads: 1,
-  maxFilesize: 5,
-  addRemoveLinks: true,
-  maxFiles: 1
-});
-    </script>
+ 
 </footer>
 <!-- / Footer -->
 

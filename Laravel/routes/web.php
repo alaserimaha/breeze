@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Superadmin\RolesController;
 use App\Http\Controllers\Superadmin\UsersController;
@@ -41,3 +42,5 @@ Route::middleware('debug')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/uploade', [UploadeController::class, 'index'])->name('uploade');
+Route::get('/result', [UploadeController::class, 'result'])->name('result');

@@ -1,0 +1,120 @@
+
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+
+@media (max-width: 767.98px)  {
+    .almarai-light {
+        font-family: "Almarai", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+      }
+      
+      .almarai-regular {
+        font-family: "Almarai", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      
+      .almarai-bold {
+        font-family: "Almarai", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+      
+      .almarai-extrabold {
+        font-family: "Almarai", sans-serif;
+        font-weight: 800;
+        font-style: normal;
+      }
+      
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "SUSE", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+    }
+    :root {
+        --main--text:#5d596c;
+        --secondary-text:#827F8D;
+        --main-btn:#38A87F;
+        --white:#ffffff;
+        --border:#d4d4d4;
+    }
+    
+    body{
+        overflow: hidden;
+        width: 100% !important;
+        text-align: center;
+        
+    }
+    
+     .logo{
+        width: 10rem;
+        display: inline;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: center;
+     }
+     
+     .container{
+       
+        text-align: center;
+     }
+     .img{
+        width: 100%;
+     }
+     h1{
+        font-size: 2rem;
+        margin: 2rem;
+     }
+     button{
+        background-color: #40CFF2;
+        font-size: 1.3rem;
+        outline: none;
+        border: none;
+        border-radius: 9px;
+        padding: 2rem 6rem;
+        margin-top: 4rem;
+        color: #ffffff;
+        font-weight: 400;
+
+     }
+     span{
+        color: #40CFF2;
+        font-weight: 600;
+     }
+     .home-img{
+        position: absolute;
+        left: 0;
+        bottom:20px;
+        width: 100% !important;
+     }
+     small{
+        display: block;
+     }
+     .result-img{
+       padding: 1rem 1rem;
+     }
+     .result-img img{
+        width: 100%;
+        border: 2px solid #40CFF2;
+        border-radius: 9;
+     }
+     .trash-type{
+        border-radius: 15px;
+        border: 1px solid #40CFF2;
+        padding: .2rem 1rem;
+     }
+     .arrow{
+      text-align: right;
+     }
+     .arrow span{
+      font-size: 2rem;
+      padding-right: 1rem;
+     }
+     small{
+      padding-top: 1rem;
+     }
+}
