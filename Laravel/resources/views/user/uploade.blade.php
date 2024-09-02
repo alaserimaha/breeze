@@ -25,7 +25,7 @@
         </div>
         <button>uploade</button>
         <img src="{{ asset('assets/img/home-img.png') }}" class="home-img" alt="">
-        <small>hint hint hint</small>
+        <small>uploade the infraction image</small>
     </div>
 </body>
 

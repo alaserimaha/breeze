@@ -43,3 +43,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/uploade', [UploadeController::class, 'index'])->name('uploade');
+Route::get('/result', [UploadeController::class, 'result'])->name('result');
