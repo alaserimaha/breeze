@@ -17,7 +17,7 @@
         "laravel/horizon": "^5.23",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "livewire/livewire": "^3.4",
+        "livewire/livewire": "^3.5",
         "predis/predis": "^2.2",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-activitylog": "^4.8",

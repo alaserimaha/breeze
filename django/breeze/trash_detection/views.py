@@ -14,6 +14,7 @@ from math import sqrt
 # Define vehicle and trash class names
 vehicle_classes = {2: 'Car', 3: 'Motorcycle', 5: 'Bus', 6: 'Train', 7: 'Truck'}
 trash_classes = {39: 'Bottle', 40: 'Wine Glass', 41: 'Cup'}
+model = torch.hub.load('./trash_detection/yolov5', 'custom', path='yolov5s.pt', source='local') 
 
 class TrashDetectionView(APIView):
     def post(self, request, format=None):
@@ -25,9 +26,6 @@ class TrashDetectionView(APIView):
         image = Image.open(image_file)
         image = image.resize((612, 408))  # Resize image
 
-        # Load YOLOv5 model
-        model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
-
         # Perform inference on the image
         results = model(image)
 
@@ -35,12 +33,15 @@ class TrashDetectionView(APIView):
         filtered_detections = self.filter_detections(results)
         draw = ImageDraw.Draw(image)
         object_detected_counter = self.process_detections(filtered_detections, draw)
+
+        # Detect vehicles
+        vehicle_detected_counter = self.detect_vehicle(object_detected_counter)
         
         # Detect trash
         trash_detected_counter = self.detect_trash(object_detected_counter)
 
         # Detect hands
-        proximity_found, hand_boxes = self.detect_hands(image, draw)
+        proximity_found, hand_boxes = self.detect_hands(image, draw, filtered_detections)
 
         # Save result image
         result_image_base64 = self.image_to_base64(image)
@@ -48,8 +49,9 @@ class TrashDetectionView(APIView):
         # Prepare response data
         response_data = {
             'result_image': result_image_base64,
-            'detection_result': object_detected_counter,
+            'vehicle_detected': vehicle_detected_counter,
             'trash_detected': trash_detected_counter,
+            'hand_boxes': hand_boxes,
             'proximity_found': proximity_found
         }
         return Response(response_data, status=status.HTTP_200_OK)
@@ -94,12 +96,16 @@ class TrashDetectionView(APIView):
             draw.text((x1, y1), f"{class_name} {conf:.2f}", fill=color)
 
         return object_detected_counter
+    
+    def detect_vehicle(self, detections):
+        vehicle_detected = {name: count for name, count in detections.items() if name in vehicle_classes.values()}
+        return vehicle_detected
 
     def detect_trash(self, detections):
         trash_detected = {name: count for name, count in detections.items() if name in trash_classes.values()}
         return trash_detected
 
-    def detect_hands(self, image, draw):
+    def detect_hands(self, image, draw, filtered_detections):
         # Convert image to numpy array for Mediapipe
         image_rgb = image.convert("RGB")
         image_np = np.array(image_rgb)
@@ -127,7 +133,7 @@ class TrashDetectionView(APIView):
 
         # Check for proximity between hands and trash
         if hand_boxes:
-            trash_boxes = [box for *box, conf, cls in detections if int(cls) in trash_classes.keys()]
+            trash_boxes = [box for *box, conf, cls in filtered_detections if int(cls) in trash_classes.keys()]
             for hand_box in hand_boxes:
                 for trash_box in trash_boxes:
                     try:
@@ -160,6 +166,11 @@ class TrashDetectionView(APIView):
 
     def image_to_base64(self, image):
         """ Convert image to a base64-encoded string. """
+        # Ensure the image is in RGB mode (JPEG does not support RGBA)
+        if image.mode == 'RGBA':
+            image = image.convert('RGB')
+        
         buffered = BytesIO()
         image.save(buffered, format="JPEG")
         return base64.b64encode(buffered.getvalue()).decode()
+

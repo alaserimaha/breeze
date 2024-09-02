@@ -1,0 +1,13 @@
+djangorestframework
+mediapipe
+torch 
+torchvision 
+numpy 
+opencv-python
+# # Install necessary libraries
+# !pip install torch torchvision numpy opencv-python
+
+# # Clone the YOLOv5 repository
+# !git clone https://github.com/ultralytics/yolov5.git
+# %cd yolov5
+# !pip install -r requirements.txt

@@ -47,7 +47,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // routes/web.php
 
 Route::get('upload', [UploadController::class, 'showForm']);
-Route::post('upload', [UploadController::class, 'uploadImage'])->name('upload.image');
+Route::get('result', [UploadController::class, 'uploadImage'])->name('upload.image');
 
 Route::get('/uploade', [UploadeController::class, 'index'])->name('uploade');
-Route::get('/result', [UploadeController::class, 'result'])->name('result');
+// Route::get('/result', [UploadeController::class, 'result'])->name('result');

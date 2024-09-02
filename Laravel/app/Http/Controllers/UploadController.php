@@ -11,26 +11,22 @@ class UploadController extends Controller
 {
     public function showForm()
     {
-        return view('upload');
+        return view('user.uploade');
     }
+
+    // return redirect()->route('upload.image')->with('data', $responseData);
+
 
     public function uploadImage(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $data = session('data');
 
-        $image = $request->file('image');
-        $path = $image->store('uploads', 'public');
+        $result_image = $data['result_image'];
+        $vehicle_detected = $data['vehicle_detected'];
+        $trash_detected = $data['trash_detected'];
+        $proximity_found = $data['proximity_found'];
 
-        // Prepare the API request
-        $response = Http::attach(
-            'image', file_get_contents(storage_path('app/public/' . $path)), 'image.jpg'
-        )->post(env('DJANGO_API_URL') . '/process-image/');
-
-        // Process the response from Django
-        $resultPath = $response->json()['result_path'];
-
-        return view('result', ['result_path' => $resultPath]);
+        
+        return view('user.result', compact('result_image', 'vehicle_detected', 'trash_detected', 'proximity_found'));
     }
 }
