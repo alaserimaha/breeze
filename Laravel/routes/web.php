@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Superadmin\RolesController;
 use App\Http\Controllers\Superadmin\UsersController;
@@ -48,3 +49,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('upload', [UploadController::class, 'showForm']);
 Route::post('upload', [UploadController::class, 'uploadImage'])->name('upload.image');
 
+Route::get('/uploade', [UploadeController::class, 'index'])->name('uploade');
+Route::get('/result', [UploadeController::class, 'result'])->name('result');
