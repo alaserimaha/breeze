@@ -2,10 +2,10 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo mt-3">
         <a href="{{ url('/') }}" class="app-brand-link">
-            <span class="app-brand-logo">
-                <img class="h-px-30" src="https://myfiles.kku.edu.sa/public/kkuLogo/kku-logo.svg">
-            </span>
-            <span class="app-brand-text demo menu-text fw-bold">{{ config('app.name') }}</span>
+            {{-- <span class="app-brand-logo">
+                <img src="{{ asset('assets/img/logo.png') }}" />
+            </span> --}}
+            {{-- <span class="app-brand-text demo menu-text fw-bold">{{ config('app.name') }}</span> --}}
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
