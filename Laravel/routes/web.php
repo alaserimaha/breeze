@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Superadmin\RolesController;
 use App\Http\Controllers\Superadmin\UsersController;
+use App\Http\Controllers\UploadController;
 
 
 Route::get('/', function () {
@@ -41,3 +42,9 @@ Route::middleware('debug')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// routes/web.php
+
+Route::get('upload', [UploadController::class, 'showForm']);
+Route::post('upload', [UploadController::class, 'uploadImage'])->name('upload.image');
+
