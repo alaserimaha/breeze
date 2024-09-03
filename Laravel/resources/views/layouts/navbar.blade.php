@@ -1,4 +1,3 @@
-        <!-- Navbar -->
         <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -19,15 +18,13 @@
                     <!--/ Style Switcher -->
 
 
-          
 
                     <!-- User -->
                     <li class="nav-item navbar-dropdown dropdown-user dropdown">
                         <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                             data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <img src="https://itcsvc.kku.edu.sa/KKU_MyKkuWS/UserImage?nickname={{ Auth::user()->username }}"
-                                    alt class="h-auto rounded-circle" />
+                            <div class="avatar " style="width:6rem; height:5rem">
+                                <img src="{{ asset('assets/img/logo.png') }}" class="logo" />
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -35,9 +32,8 @@
                                 <a class="dropdown-item" href="pages-account-settings-account.html">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0 me-3">
-                                            <div class="avatar avatar-online">
-                                                <img src="https://itcsvc.kku.edu.sa/KKU_MyKkuWS/UserImage?nickname={{ Auth::user()->username }}"
-                                                    alt class="h-auto rounded-circle" />
+                                            <div class="avatar " style="width:6rem; height:5rem">
+                                                <img src="{{ asset('assets/img/logo.png') }}" class="logo" />
                                             </div>
                                         </div>
                                         <div class="flex-grow-1">
