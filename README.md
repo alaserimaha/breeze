@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/56ecfa76-1257-4787-8017-332330f52051)
 # Breez
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/alaserimaha/breeze)
@@ -18,38 +18,40 @@ StudySnap aims to address the challenges students face in managing and reviewing
 
 ## Features
 
-- **Interactive Review Cards**: Automatically generate flashcards with multiple-choice or short-answer questions to help students assess their understanding.
-- **Content Summarization**: Provides concise summaries of uploaded study materials to aid quick revision.
-- **Detailed Explanations**: Offers video explanations and illustrative diagrams for complex topics, particularly useful in subjects like medicine and engineering.
+- For Drivers: Allows them to view details of their infraction.
+- For Authorities: Provides access to data and assesses street pollution.
+- Integration: Breez Can be connected with Saudi system "Saher".
+- AI Technologies: we Used AI to deliver advanced solutions for a problem where it is lacking.
+![image](https://github.com/user-attachments/assets/293d8b3a-267b-4056-a4cb-54379122fa0e)
+
+- **For Drivers**: Allows them to view details of their infraction.
+- **For Authorities**: Provides access to data and assesses street pollution.
+- **Integration**: Offers video explanations and illustrative diagrams for complex topics, particularly useful in subjects like medicine and engineering.
+- **Integration**: Breez Can be connected with Saudi system "Saher".
+- **AI Technologies**: we Used AI to deliver advanced solutions for a problem where it is lacking .
+
 
 ## Installation
 
-StudySnap consists of two main components: the app (built with Laravel) and the API (powered by Django). Below are the steps to set up the API.
+Breez consists of two main components: the app (built with Laravel) and the API (powered by Django). Below are the steps to set up the API.
 
 ### Prerequisites
 
 Ensure you have Python installed on your machine. The project uses various Python packages, which can be installed via pip:
 
 ```bash
-pip install django djangorestframework PyMuPDF nltk torch transformers scipy Pillow sentencepiece python-dotenv easyocr boto3 PyPDF2
-pip install git+https://github.com/boudinfl/pke.git
-python -m nltk.downloader universal_tagset
-python -m spacy download en
-wget https://github.com/explosion/sense2vec/releases/download/v1.0.0/s2v_reddit_2015_md.tar.gz
-tar -xvf s2v_reddit_2015_md.tar.gz
-pip install strsimpy flashtext openai
-pip install strsim==0.0.3 six==1.16.0 networkx==3.1 numpy scikit-learn==1.2.2 unidecode==1.3 future==0.18.3 joblib==1.2.0 pytz==2022.7.1 python-dateutil==2.8.2 pandas
+ pip install -r requirements. txt
 ```
 
 ### Setting Up
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/hsndev18/study_snap.git
+    git clone https://github.com/alaserimaha/breeze.git
     ```
 2. Navigate to the API directory:
     ```bash
-    cd studysnap/api
+    cd breeze/django
     ```
 3. Set up the Django environment:
     ```bash
@@ -72,12 +74,11 @@ However, for a visual representation such as badges or charts directly in your R
 
 ![Team Photo](https://i.ibb.co/7vLZHzX/PHOTO-2024-06-23-18-31-04.jpg)
 
-- **Mohamed Mohana** - Entrepreneurship Specialist, Team Leader
-- **Fahad Al-Qahtani** - UI/UX Designer
-- **Maha Assiri** - AI Developer
-- **Hassan Al-Sheikh** - Full Stack Developer
-- **Amjad Muhanna** - System Analyst
+- **AREEJ THAMER** - Full Stack Developer
+- **MAHA NASSER** - AI Developer
+- **RAGHAD FAHAD** - UI/UX Designer 
+- **ROOA FAHAD** - Content specialists
 
 ## Acknowledgements
 
-Thanks to all contributors and EDUTHON organizers for the opportunity to develop this innovative solution to enhance educational experiences.
+Thanks to all contributors and HPC organizers for the opportunity to develop this innovative solution to enhance educational experiences.
