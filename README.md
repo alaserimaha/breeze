@@ -1,5 +1,5 @@
 
-# StudySnap
+# Breez
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/alaserimaha/breeze)
 ![GitHub contributors](https://img.shields.io/github/contributors/alaserimaha/breeze)
