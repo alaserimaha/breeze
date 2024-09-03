@@ -6,15 +6,34 @@ from rest_framework.views import APIView
 from PIL import Image, ImageDraw
 import numpy as np
 import torch
+from ultralytics import YOLO
 import mediapipe as mp
 from io import BytesIO
 import base64
 from math import sqrt
 
-# Define vehicle and trash class names
-vehicle_classes = {2: 'Car', 3: 'Motorcycle', 5: 'Bus', 6: 'Train', 7: 'Truck'}
-trash_classes = {39: 'Bottle', 40: 'Wine Glass', 41: 'Cup'}
-model = torch.hub.load('./trash_detection/yolov5', 'custom', path='yolov5s.pt', source='local') 
+# Define waste and vehicle categories
+TRASH_CLASSES = {
+    0: 'cardboard_box', 1: 'can', 2: 'plastic_bottle_cap', 3: 'plastic_bottle', 
+    4: 'reuseable_paper', 5: 'plastic_bag', 6: 'scrap_paper', 7: 'stick', 
+    8: 'plastic_cup', 9: 'snack_bag', 10: 'plastic_box', 11: 'straw', 
+    12: 'plastic_cup_lid', 13: 'scrap_plastic', 14: 'cardboard_bowl', 
+    15: 'plastic_cultery', 16: 'battery', 17: 'chemical_spray_can', 
+    18: 'chemical_plastic_bottle', 19: 'chemical_plastic_gallon', 
+    20: 'light_bulb', 21: 'paint_bucket'
+}
+
+VEHICLE_CLASSES = {2: 'Car', 3: 'Motorcycle', 5: 'Bus', 6: 'Train', 7: 'Truck'}
+HELPER_TRASH_CLASSES = {
+    39: 'Bottle', 40: 'Wine Glass', 41: 'Cup', 42: 'Fork', 43: 'Knife', 
+    44: 'Spoon', 45: 'Bowl', 46: 'Banana', 47: 'Apple', 48: 'Sandwich', 
+    49: 'Orange', 50: 'Broccoli', 51: 'Carrot', 52: 'Hot Dog', 53: 'Pizza', 
+    54: 'Donut', 55: 'Cake', 56: 'Can', 57: 'Paper', 58: 'Tissue'
+}
+
+# Load the YOLO models
+trash_model = YOLO("django/breeze/trash_detection/best_trash.pt")  # Main model for trash detection
+helper_model = YOLO("yolov8m.pt")  # Helper model for vehicles and additional trash detection
 
 class TrashDetectionView(APIView):
     def post(self, request, format=None):
@@ -25,23 +44,55 @@ class TrashDetectionView(APIView):
         # Load image from uploaded file
         image = Image.open(image_file)
         image = image.resize((612, 408))  # Resize image
+        image_np = np.array(image)
 
-        # Perform inference on the image
-        results = model(image)
+        # Perform trash detection with the `best_trash.pt` model
+        trash_results = trash_model(image_np)
+        trash_result = trash_results[0]
+        trash_bboxes = np.array(trash_result.boxes.xyxy.cpu(), dtype="int")
+        trash_classes = np.array(trash_result.boxes.cls.cpu(), dtype="int")
 
-        # Process detections
-        filtered_detections = self.filter_detections(results)
+        # Perform additional detection with the `yolov8m.pt` model
+        helper_results = helper_model(image_np)
+        helper_result = helper_results[0]
+        helper_bboxes = np.array(helper_result.boxes.xyxy.cpu(), dtype="int")
+        helper_classes = np.array(helper_result.boxes.cls.cpu(), dtype="int")
+
+        # Create a draw object for the PIL image
         draw = ImageDraw.Draw(image)
-        object_detected_counter = self.process_detections(filtered_detections, draw)
+        object_detected_counter = {}
 
-        # Detect vehicles
-        vehicle_detected_counter = self.detect_vehicle(object_detected_counter)
-        
-        # Detect trash
-        trash_detected_counter = self.detect_trash(object_detected_counter)
+        # Process trash detections from `best_trash.pt`
+        for cls, bbox in zip(trash_classes, trash_bboxes):
+            (x, y, x2, y2) = bbox
+            class_name = TRASH_CLASSES.get(cls, "Unknown")
+
+            # Increment the counter for the detected class
+            if class_name not in object_detected_counter:
+                object_detected_counter[class_name] = 0
+            object_detected_counter[class_name] += 1
+
+            # Draw rectangle around detected trash
+            draw.rectangle([x, y, x2, y2], outline="red", width=3)
+            draw.text((x, y), f"{class_name}", fill="red")
+
+        # Process helper detections for vehicles and additional trash items
+        for cls, bbox in zip(helper_classes, helper_bboxes):
+            (x, y, x2, y2) = bbox
+            if VEHICLE_CLASSES.get(cls) or HELPER_TRASH_CLASSES.get(cls):
+                class_name = VEHICLE_CLASSES.get(cls, HELPER_TRASH_CLASSES.get(cls, "Unknown"))
+
+                # Increment the counter for the detected class
+                if class_name not in object_detected_counter:
+                    object_detected_counter[class_name] = 0
+                object_detected_counter[class_name] += 1
+
+                # Draw rectangle around detected objects
+                draw.rectangle([x, y, x2, y2], outline="green", width=2)
+                draw.text((x, y), f"{class_name}", fill="green")
 
         # Detect hands
-        proximity_found, hand_boxes = self.detect_hands(image, draw, filtered_detections)
+        proximity_found, hand_boxes = self.detect_hands(image, draw, trash_bboxes, trash_classes)
 
         # Save result image
         result_image_base64 = self.image_to_base64(image)
@@ -49,69 +100,20 @@ class TrashDetectionView(APIView):
         # Prepare response data
         response_data = {
             'result_image': result_image_base64,
-            'vehicle_detected': vehicle_detected_counter,
-            'trash_detected': trash_detected_counter,
+            'vehicle_detected': self.detect_vehicle(object_detected_counter),
+            'trash_detected': self.detect_trash(object_detected_counter),
             'hand_boxes': hand_boxes,
             'proximity_found': proximity_found
         }
         return Response(response_data, status=status.HTTP_200_OK)
 
-    def filter_detections(self, results):
-        # Filter detections by class
-        car_results = results.xyxy[0][results.xyxy[0][:, 5] == 2]  # Class 2: Car
-        motorcycle_results = results.xyxy[0][results.xyxy[0][:, 5] == 3]  # Class 3: Motorcycle
-        bus_results = results.xyxy[0][results.xyxy[0][:, 5] == 5]  # Class 5: Bus
-        train_results = results.xyxy[0][results.xyxy[0][:, 5] == 6]  # Class 6: Train
-        truck_results = results.xyxy[0][results.xyxy[0][:, 5] == 7]  # Class 7: Truck
-        bottle_results = results.xyxy[0][results.xyxy[0][:, 5] == 39]  # Class 39: Bottle
-        wine_glass_results = results.xyxy[0][results.xyxy[0][:, 5] == 40]  # Class 40: Wine Glass
-        cup_results = results.xyxy[0][results.xyxy[0][:, 5] == 41]  # Class 41: Cup
-        return torch.cat((car_results, motorcycle_results, bus_results, train_results, truck_results, bottle_results, wine_glass_results, cup_results), 0)
-
-    def process_detections(self, detections, draw):
-        object_detected_counter = {}
-        for i, (*box, conf, cls) in enumerate(detections, 1):
-            class_id = int(cls)
-            class_name = vehicle_classes.get(class_id, trash_classes.get(class_id, f"Class {class_id}"))
-
-            # Increment the counter for the detected class
-            if class_name not in object_detected_counter:
-                object_detected_counter[class_name] = 0
-            object_detected_counter[class_name] += 1
-
-            # Convert coordinates to integers
-            x1, y1, x2, y2 = map(int, box)
-
-            # Assign colors based on class name
-            color = "red" if class_name == 'Car' else \
-                    "blue" if class_name == 'Motorcycle' else \
-                    "green" if class_name == 'Bus' else \
-                    "yellow" if class_name == 'Train' else \
-                    "black" if class_name == 'Truck' else \
-                    "cyan" if class_name == 'Bottle' else \
-                    "magenta" if class_name == 'Wine Glass' else \
-                    "orange"
-
-            draw.rectangle([x1, y1, x2, y2], outline=color, width=3)
-            draw.text((x1, y1), f"{class_name} {conf:.2f}", fill=color)
-
-        return object_detected_counter
-    
-    def detect_vehicle(self, detections):
-        vehicle_detected = {name: count for name, count in detections.items() if name in vehicle_classes.values()}
-        return vehicle_detected
-
-    def detect_trash(self, detections):
-        trash_detected = {name: count for name, count in detections.items() if name in trash_classes.values()}
-        return trash_detected
-
-    def detect_hands(self, image, draw, filtered_detections):
+    def detect_hands(self, image, draw, trash_bboxes, trash_classes):
         # Convert image to numpy array for Mediapipe
         image_rgb = image.convert("RGB")
         image_np = np.array(image_rgb)
 
         # Use Mediapipe to detect hands
-        mp_hands = mp.solutions.hands.Hands(static_image_mode=True, max_num_hands=2, min_detection_confidence=0.5)
+        mp_hands = mp.solutions.hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.1)
         hand_results = mp_hands.process(image_np)
 
         hand_boxes = []
@@ -133,12 +135,12 @@ class TrashDetectionView(APIView):
 
         # Check for proximity between hands and trash
         if hand_boxes:
-            trash_boxes = [box for *box, conf, cls in filtered_detections if int(cls) in trash_classes.keys()]
+            trash_boxes = [box for *box, cls in zip(trash_bboxes, trash_classes) if cls in TRASH_CLASSES.keys()]
             for hand_box in hand_boxes:
                 for trash_box in trash_boxes:
                     try:
                         distance = self.calculate_distance(hand_box, trash_box)
-                        if distance > 20:  # Threshold for proximity in pixels
+                        if distance < 50:  # Threshold for proximity in pixels
                             proximity_found = True
                             break
                     except ValueError as e:
@@ -173,4 +175,3 @@ class TrashDetectionView(APIView):
         buffered = BytesIO()
         image.save(buffered, format="JPEG")
         return base64.b64encode(buffered.getvalue()).decode()
-
