@@ -23,6 +23,12 @@ class ImageUpload extends Component
     {
         $this->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ],
+        [
+            'image.required' => 'Please upload an image',
+            'image.image' => 'The file must be an image',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg',
+            'image.max' => 'The image must be less than 2MB',
         ]);
 
         $this->uploading = true;
@@ -50,6 +56,12 @@ class ImageUpload extends Component
     {
         $this->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ],
+        [
+            'image.required' => 'Please upload an image',
+            'image.image' => 'The file must be an image',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg',
+            'image.max' => 'The image must be less than 2MB',
         ]);
 
         $this->uploading = true;

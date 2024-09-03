@@ -53,9 +53,7 @@
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
-    <!-- KKU CSS -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-    
+    <!-- KKU CSS -->    
     {{-- <link rel="stylesheet" href="{{ asset('strategy/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('strategy/vendor/fonts/remixicon.css') }}" /> --}}
 

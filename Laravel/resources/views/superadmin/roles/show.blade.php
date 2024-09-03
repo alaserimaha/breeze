@@ -15,7 +15,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('dashboard.index') }}">{{ __('لوحة التحكم') }}</a>
+                    <a href="{{ route('dashboard.index') }}">{{ __('Dashboard') }}</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('roles.index') }}">{{ __('إدارة المستخدمين') }}</a>

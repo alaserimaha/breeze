@@ -534,7 +534,7 @@ button.list-group-item-primary.active {
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
-  background-color: rgb(36, 130, 119) !important;
+  background-color: #7367f0 !important;
   color: #fff;
 }
 

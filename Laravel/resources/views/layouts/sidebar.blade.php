@@ -20,7 +20,7 @@
         <li class="menu-item ">
             <a href="{{ route('dashboard.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
-                <div data-i18n="{{ __('لوحة التحكم') }}">{{ __('لوحة التحكم') }}</div>
+                <div data-i18n="{{ __('Dashboard') }}">{{ __('Dashboard') }}</div>
             </a>
         </li>
 

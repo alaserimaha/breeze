@@ -14,7 +14,7 @@
                         <h2 class="content-header-title float-left mb-0">{{ __('اضافة اذن جديد') }}</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('لوحة التحكم') }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">{{ __('ادارة الأذونات') }}</a>
                                 </li>

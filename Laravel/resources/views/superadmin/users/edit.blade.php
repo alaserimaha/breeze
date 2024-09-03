@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('dashboard.index') }}">{{ __('لوحة التحكم') }}</a>
+                    <a href="{{ route('dashboard.index') }}">{{ __('Dashboard') }}</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('users.index') }}">{{ __('إدارة المستخدمين') }}</a>
@@ -74,7 +74,7 @@
                         <h2 class="content-header-title float-left mb-0">{{ __('تعديل مستخدم') }}</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('لوحة التحكم') }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('users.index') }}">{{ __('ادارة المستخدمين') }}</a>
                                 </li>

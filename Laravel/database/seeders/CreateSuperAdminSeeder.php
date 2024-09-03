@@ -66,7 +66,6 @@ class CreateSuperAdminSeeder extends Seeder
                 'password' => Hash::make('manaasiri$312%578'),
                 'phone_number' => '054215543',
                 'mobile_number' => '054215543',
-
             ],
         );
 
