@@ -14,15 +14,10 @@ Welcome to the GitHub repository of **Breez**, crafted by the **Fresh Sight** te
 
 ## Description
 
-StudySnap aims to address the challenges students face in managing and reviewing extensive educational materials. Using AI technologies, the platform analyzes uploaded study materials and converts them into interactive review cards, summarizations, and detailed explanatory videos, making study sessions more effective and engaging.
+During our time with **HPC** hackathon, we worked on Breeze, a system capable of being linked to any camera. This system detects litter or trash discarded from vehicles onto the street, documents it as an infraction, and alerts the driver. Additionally, relevant authorities can access this data and generate reports on the level of waste on Saudi streets, all through "breeze".!
 
 ## Features
 
-- For Drivers: Allows them to view details of their infraction.
-- For Authorities: Provides access to data and assesses street pollution.
-- Integration: Breez Can be connected with Saudi system "Saher".
-- AI Technologies: we Used AI to deliver advanced solutions for a problem where it is lacking.
-![image](https://github.com/user-attachments/assets/293d8b3a-267b-4056-a4cb-54379122fa0e)
 
 - **For Drivers**: Allows them to view details of their infraction.
 - **For Authorities**: Provides access to data and assesses street pollution.
