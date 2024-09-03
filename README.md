@@ -66,7 +66,7 @@ However, for a visual representation such as badges or charts directly in your R
 
 ## Team
 
-!<img src="Picture.png" width="100" height="100">
+<img src="Picture.png" width="300" height="100">
 
 - **AREEJ THAMER** - Full Stack Developer
 - **MAHA NASSER** - AI Developer
