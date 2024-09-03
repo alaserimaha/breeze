@@ -67,7 +67,7 @@ However, for a visual representation such as badges or charts directly in your R
 
 ## Team
 
-![Team Photo](https://i.ibb.co/7vLZHzX/PHOTO-2024-06-23-18-31-04.jpg)
+![Team Photo](Picture.png)
 
 - **AREEJ THAMER** - Full Stack Developer
 - **MAHA NASSER** - AI Developer
