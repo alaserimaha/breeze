@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/56ecfa76-1257-4787-8017-332330f52051)
 # Breez
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/alaserimaha/breeze)
@@ -67,7 +66,7 @@ However, for a visual representation such as badges or charts directly in your R
 
 ## Team
 
-![Team Photo](Picture.png)
+![Team Photo](Picture.png  | width=100)
 
 - **AREEJ THAMER** - Full Stack Developer
 - **MAHA NASSER** - AI Developer
