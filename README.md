@@ -75,4 +75,4 @@ However, for a visual representation such as badges or charts directly in your R
 
 ## Acknowledgements
 
-Thanks to all contributors and HPC organizers for the opportunity to develop this innovative solution to enhance educational experiences.
+Thanks to all contributors and HPC organizers for the opportunity to develop this innovative solution .
