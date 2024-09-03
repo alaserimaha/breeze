@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/alaserimaha/breeze?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/alaserimaha/breeze)
 
-![EDUTHON Logo](https://sprint.kku.edu.sa/storage/hackathons/ClEbQMJAQjmgWM0zdXSTmfUnoFTnCI6hUdfpiI7H.jpg)
+![EDUTHON Logo](https://sprint.kku.edu.sa/storage/hackathons/lm9Ad4Q36dVMcyLdRJlDqPS43eUgmY81BUjiMJq5.jpg)
 
 Welcome to the GitHub repository of **Breez**, crafted by the **Fresh Sight** team for the **HPC** hackathon. **Breez** is a system capable of being linked to any camera. This system detects litter or trash discarded from vehicles onto the street, documents it as an infraction, and alerts the driver. Additionally, relevant authorities can access this data and generate reports on the level of waste on Saudi streets.
 
