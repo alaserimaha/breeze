@@ -10,7 +10,7 @@ use App\Http\Controllers\Superadmin\UsersController;
 use App\Http\Controllers\UploadController;
 
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return redirect()->route('dashboard.index');
 });
 
@@ -46,7 +46,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // routes/web.php
 
-Route::get('upload', [UploadController::class, 'showForm']);
+Route::get('/', [UploadController::class, 'showForm']);
 Route::get('result', [UploadController::class, 'uploadImage'])->name('upload.image');
 
 Route::get('/uploade', [UploadeController::class, 'index'])->name('uploade');

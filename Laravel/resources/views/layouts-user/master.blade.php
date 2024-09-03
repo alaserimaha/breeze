@@ -20,7 +20,7 @@
     <!-- END: Custom Links For Individual Page-->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://myfiles.kku.edu.sa/public/kkuLogo/kku-logo-ico.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
 
     <!-- Google Fonts -> Tajawal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
